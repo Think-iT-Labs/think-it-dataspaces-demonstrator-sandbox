@@ -1,0 +1,30 @@
+meta {
+  name: Get Agreement For Negotiation V3
+  type: http
+  seq: 5
+}
+
+get {
+  url: {{management_url}}/v3/contractnegotiations/{{negotiationId}}/agreement
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  negotiationId: negotiation-id-example
+}
+
+docs {
+  Retrieve the contract agreement resulting from a finalized negotiation.
+  
+  Update the negotiationId variable with the negotiation ID.
+  
+  This endpoint only works if the negotiation state is FINALIZED.
+  Returns the full contract agreement including:
+  - Agreement ID (needed for data transfer)
+  - Asset details
+  - Policy terms
+  - Signing information
+  
+  Use the agreement ID from this response to initiate a transfer process.
+}

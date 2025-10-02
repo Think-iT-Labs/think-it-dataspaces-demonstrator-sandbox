@@ -1,0 +1,22 @@
+meta {
+  name: Get Agreement By Id V3
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{management_url}}/v3/contractagreements/{{agreementId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  agreementId: agreement-id-example
+}
+
+docs {
+  Retrieve a specific contract agreement by its ID.
+  
+  Update the agreementId variable with the actual agreement ID you want to retrieve.
+  Agreement IDs are typically returned from the Query Agreements endpoint or after a successful negotiation.
+}

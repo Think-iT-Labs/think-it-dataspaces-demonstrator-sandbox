@@ -1,0 +1,40 @@
+meta {
+  name: Request Catalog V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/catalog/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  counterPartyAddress: https://example-connector.dataspaces.think-it.io/api/dsp
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "protocol": "dataspace-protocol-http",
+    "counterPartyAddress": "{{counterPartyAddress}}",
+    "querySpec": {
+      "limit": 50,
+      "offset": 0
+    }
+  }
+}
+
+docs {
+  Request the catalog from another EDC connector.
+  
+  Update counterPartyAddress with the DSP endpoint of the target connector.
+  This typically uses the protocol_url format (ending with /api/dsp).
+}

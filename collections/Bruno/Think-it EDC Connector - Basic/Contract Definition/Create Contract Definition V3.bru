@@ -1,0 +1,45 @@
+meta {
+  name: Create Contract Definition V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/contractdefinitions
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  definitionId: contract-definition-1
+  accessPolicyId: policy-1
+  contractPolicyId: policy-1
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@id": "{{definitionId}}",
+    "accessPolicyId": "{{accessPolicyId}}",
+    "contractPolicyId": "{{contractPolicyId}}",
+    "assetsSelector": []
+  }
+}
+
+docs {
+  Create a new contract definition.
+  
+  Variables to configure:
+  - definitionId: Unique identifier for this contract definition
+  - accessPolicyId: Policy ID that controls who can access/see the assets
+  - contractPolicyId: Policy ID that defines the terms of use for the assets
+  
+  The assetsSelector array can contain criteria to select which assets this definition applies to.
+  An empty array means it applies to all assets.
+}

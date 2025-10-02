@@ -1,0 +1,28 @@
+meta {
+  name: Get Negotiation V3
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{management_url}}/v3/contractnegotiations/{{negotiationId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  negotiationId: negotiation-id-example
+}
+
+docs {
+  Retrieve detailed information about a specific contract negotiation.
+  
+  Update the negotiationId variable with the actual negotiation ID.
+  Negotiation IDs are returned when you initiate a negotiation or from the Query Negotiations endpoint.
+  
+  The response includes:
+  - Current state of the negotiation
+  - Counter party information
+  - Contract offer details
+  - Agreement ID (if finalized)
+}

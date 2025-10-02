@@ -1,0 +1,21 @@
+meta {
+  name: Remove Asset V3
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{management_url}}/v3/assets/{{assetId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  assetId: asset-test-1
+}
+
+docs {
+  Delete an asset by its ID.
+  
+  Update the assetId variable with the asset ID you want to remove.
+}

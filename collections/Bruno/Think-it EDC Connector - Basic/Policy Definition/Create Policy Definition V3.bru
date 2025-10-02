@@ -1,0 +1,62 @@
+meta {
+  name: Create Policy Definition V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/policydefinitions
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  policyId: policy-1
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@id": "{{policyId}}",
+    "policy": {
+      "@context": "http://www.w3.org/ns/odrl.jsonld",
+      "@type": "Set",
+      "permission": [
+        {
+          "action": "use",
+          "constraint": []
+        }
+      ],
+      "obligation": [],
+      "prohibition": []
+    }
+  }
+}
+
+docs {
+  Create a new policy definition using ODRL (Open Digital Rights Language).
+  
+  Variables to configure:
+  - policyId: Unique identifier for this policy
+  
+  Policy Structure:
+  - permission: Actions that are allowed (e.g., "use", "transfer")
+  - prohibition: Actions that are forbidden
+  - obligation: Actions that must be performed
+  - constraint: Conditions that must be met
+  
+  Common constraint examples:
+  - Time-based: POLICY_EVALUATION_TIME < "2025-12-31"
+  - Connector-based: REFERRING_CONNECTOR = "specific-connector-id"
+  - Location-based: spatial = "Germany"
+  - Purpose-based: purpose = "research"
+  
+  This is an "always allow" policy (no constraints).
+  Use in Contract Definitions as accessPolicyId or contractPolicyId.
+}

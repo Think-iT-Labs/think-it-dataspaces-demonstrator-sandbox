@@ -1,0 +1,21 @@
+meta {
+  name: Get Asset V3
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{management_url}}/v3/assets/{{assetId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  assetId: asset-test-1
+}
+
+docs {
+  Retrieve a specific asset by its ID.
+  
+  Update the assetId variable with the actual asset ID you want to retrieve.
+}

@@ -1,0 +1,8 @@
+{
+  "version": "1",
+  "name": "Think-it EDC Connector - Basic",
+  "type": "collection",
+  "ignore": [
+    ".git"
+  ]
+}

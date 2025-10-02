@@ -1,0 +1,25 @@
+meta {
+  name: Think-it EDC Connector - Basic
+  seq: 1
+}
+
+auth {
+  mode: apikey
+}
+
+auth:apikey {
+  key: x-api-key
+  value: {{api_key}}
+  placement: header
+}
+vars:pre-request {
+  management_url: {{base_url}}/api/management
+  api_key: your-api-key
+  base_url: https://aws-cloud.dataspace-sandbox.think-it.io
+}
+
+docs {
+  A comprehensive collection of API requests for Think-it EDC Connector in its Basic Variants (made for demonstrator purposes only)
+  
+  Maintained by Think-it GmbH - [https://think-it.io](https://think-it.io)
+}

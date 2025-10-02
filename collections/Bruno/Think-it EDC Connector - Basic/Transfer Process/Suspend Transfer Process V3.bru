@@ -1,0 +1,54 @@
+meta {
+  name: Suspend Transfer Process V3
+  type: http
+  seq: 7
+}
+
+post {
+  url: {{management_url}}/v3/transferprocesses/{{transferProcessId}}/suspend
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  transferProcessId: transfer-process-id-example
+  suspensionReason: Temporary suspension for maintenance
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "reason": "{{suspensionReason}}"
+  }
+}
+
+docs {
+  Suspend an active transfer process.
+  
+  Variables to configure:
+  - transferProcessId: The transfer process ID to suspend
+  - suspensionReason: Human-readable reason for suspension
+  
+  Use this to:
+  - Pause transfers during maintenance windows
+  - Temporarily stop transfers due to network issues
+  - Control transfer rate/timing
+  - Pause while investigating issues
+  
+  Requirements:
+  - Transfer must be in an active state (STARTED, REQUESTING, etc.)
+  - Cannot suspend COMPLETED or TERMINATED transfers
+  
+  After suspending:
+  - Transfer state changes to SUSPENDED
+  - Transfer activity pauses
+  - Use Resume endpoint to continue later
+  
+  Note: Provider must support suspension (not all implementations do).
+}

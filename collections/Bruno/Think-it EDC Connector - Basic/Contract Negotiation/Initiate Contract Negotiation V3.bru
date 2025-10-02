@@ -1,0 +1,65 @@
+meta {
+  name: Initiate Contract Negotiation V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/contractnegotiations
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  counterPartyAddress: https://example-connector.dataspaces.think-it.io/api/dsp
+  counterPartyId: example-connector-id
+  offerId: offer-id-from-catalog
+  assetId: asset-test-1
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "ContractRequest",
+    "counterPartyAddress": "{{counterPartyAddress}}",
+    "protocol": "dataspace-protocol-http",
+    "policy": {
+      "@context": "http://www.w3.org/ns/odrl.jsonld",
+      "@type": "odrl:Offer",
+      "@id": "{{offerId}}",
+      "assigner": "{{counterPartyId}}",
+      "odrl:permission": {
+        "odrl:action": {
+          "@id": "use"
+        }
+      },
+      "odrl:prohibition": [],
+      "odrl:obligation": [],
+      "target": "{{assetId}}"
+    }
+  }
+}
+
+docs {
+  Initiate a contract negotiation with another connector.
+  
+  Variables to configure:
+  - counterPartyAddress: The DSP endpoint of the provider connector (protocol_url format, e.g., https://example.io/api/dsp)
+  - counterPartyId: The participant ID of the provider connector
+  - offerId: The offer ID obtained from the catalog request (format: assetId:policyId:definitionId)
+  - assetId: The target asset ID you want to negotiate access to
+  
+  Workflow:
+  1. Request catalog from provider connector
+  2. Find the asset and offer you want
+  3. Copy the offer ID and other details
+  4. Initiate negotiation with these values
+  5. Poll negotiation status until FINALIZED
+  6. Use resulting agreement for transfer
+}

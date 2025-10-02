@@ -1,0 +1,81 @@
+meta {
+  name: Update Policy Definition V3
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{management_url}}/v3/policydefinitions/{{policyId}}
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  policyId: policy-1
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@id": "{{policyId}}",
+    "policy": {
+      "@context": "http://www.w3.org/ns/odrl.jsonld",
+      "@type": "Set",
+      "permission": [
+        {
+          "action": "use",
+          "constraint": [
+            {
+              "leftOperand": "spatial",
+              "operator": "eq",
+              "rightOperand": "https://www.wikidata.org/wiki/Q183"
+            }
+          ]
+        }
+      ],
+      "obligation": [],
+      "prohibition": []
+    }
+  }
+}
+
+docs {
+  Update an existing policy definition.
+  
+  Update the policyId variable with the policy ID to modify.
+  
+  This is a full replacement update - all policy fields must be provided.
+  The example includes a spatial constraint (location = Germany).
+  
+  Common constraint patterns:
+  
+  Time constraint:
+  {
+    "leftOperand": "POLICY_EVALUATION_TIME",
+    "operator": "lt",
+    "rightOperand": "2025-12-31T23:59:59Z"
+  }
+  
+  Connector constraint:
+  {
+    "leftOperand": "REFERRING_CONNECTOR",
+    "operator": "eq",
+    "rightOperand": "connector-id"
+  }
+  
+  Multiple constraints (AND):
+  {
+    "and": [
+      { constraint1 },
+      { constraint2 }
+    ]
+  }
+  
+  Note: Updates affect future negotiations, not existing agreements.
+}

@@ -1,0 +1,47 @@
+meta {
+  name: Query Transfer Process V3
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{management_url}}/v3/transferprocesses/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "QuerySpec",
+    "offset": 0,
+    "limit": 50,
+    "filterExpression": []
+  }
+}
+
+docs {
+  Query and list all transfer processes with pagination support.
+  
+  Returns transfers in various states:
+  - INITIAL: Just created
+  - PROVISIONING/PROVISIONED: Preparing resources
+  - REQUESTING/REQUESTED: Requesting data transfer
+  - STARTING/STARTED: Transfer beginning
+  - COMPLETING/COMPLETED: Transfer finished successfully
+  - TERMINATING/TERMINATED: Transfer cancelled
+  - DEPROVISIONING/DEPROVISIONED: Resources cleaned up
+  - SUSPENDED: Transfer paused
+  
+  Use filterExpression to narrow results by:
+  - State (e.g., only COMPLETED transfers)
+  - Agreement ID
+  - Asset ID
+  - Counter party
+}

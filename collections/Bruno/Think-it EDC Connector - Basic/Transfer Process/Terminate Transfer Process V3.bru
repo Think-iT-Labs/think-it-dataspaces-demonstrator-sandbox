@@ -1,0 +1,56 @@
+meta {
+  name: Terminate Transfer Process V3
+  type: http
+  seq: 8
+}
+
+post {
+  url: {{management_url}}/v3/transferprocesses/{{transferProcessId}}/terminate
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  transferProcessId: transfer-process-id-example
+  terminationReason: Transfer no longer needed
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "TerminateTransfer",
+    "reason": "{{terminationReason}}"
+  }
+}
+
+docs {
+  Terminate an active transfer process permanently.
+  
+  Variables to configure:
+  - transferProcessId: The transfer process ID to terminate
+  - terminationReason: Human-readable reason for termination
+  
+  Use this to:
+  - Cancel transfers that are no longer needed
+  - Stop failed/stuck transfers
+  - Clean up transfers with errors
+  - Abort transfers started by mistake
+  
+  Requirements:
+  - Transfer must not already be TERMINATED or COMPLETED
+  - Cannot terminate already finished transfers
+  
+  After terminating:
+  - Transfer state changes to TERMINATING → TERMINATED
+  - Transfer activity stops permanently
+  - Cannot be resumed (unlike suspension)
+  - Resources are cleaned up
+  
+  Note: This is permanent. Use Suspend if you might want to resume later.
+}

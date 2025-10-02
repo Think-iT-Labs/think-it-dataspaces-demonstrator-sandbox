@@ -1,0 +1,33 @@
+meta {
+  name: Get EDR Entry Data Address V3
+  type: http
+  seq: 2
+}
+
+get {
+  url: {{management_url}}/v3/edrs/{{transferProcessId}}/dataaddress
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  transferProcessId: transfer-process-id-example
+}
+
+docs {
+  Retrieve the data address (endpoint details) for a specific EDR entry.
+  
+  Update the transferProcessId variable with the transfer process ID.
+  Transfer process IDs are obtained from:
+  - The Create Transfer Process response
+  - Query Transfer Process results
+  - Request EDR Entries results
+  
+  The data address contains:
+  - Endpoint URL where data can be accessed
+  - Authentication method (e.g., bearer token, API key)
+  - Authorization credentials
+  - Additional endpoint properties
+  
+  Use this information to make actual data requests to the provider's endpoint.
+}

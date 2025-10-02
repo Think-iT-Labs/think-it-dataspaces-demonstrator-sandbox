@@ -1,0 +1,45 @@
+meta {
+  name: Terminate Negotiation V3
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{management_url}}/v3/contractnegotiations/{{negotiationId}}/terminate
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  negotiationId: negotiation-id-example
+  terminationReason: Negotiation no longer needed
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "TerminateNegotiation",
+    "reason": "{{terminationReason}}"
+  }
+}
+
+docs {
+  Terminate an ongoing contract negotiation.
+  
+  Variables to configure:
+  - negotiationId: The negotiation ID you want to terminate
+  - terminationReason: Human-readable reason for termination
+  
+  This can be used to cancel negotiations that:
+  - Are taking too long
+  - Are no longer needed
+  - Have incorrect parameters
+  
+  Note: Only works on negotiations that are not yet FINALIZED or already TERMINATED.
+}

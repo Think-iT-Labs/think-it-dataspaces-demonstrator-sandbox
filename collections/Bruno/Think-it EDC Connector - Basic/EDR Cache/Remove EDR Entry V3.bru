@@ -1,0 +1,33 @@
+meta {
+  name: Remove EDR Entry V3
+  type: http
+  seq: 3
+}
+
+delete {
+  url: {{management_url}}/v3/edrs/{{transferProcessId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  transferProcessId: transfer-process-id-example
+}
+
+docs {
+  Remove an EDR entry from the cache.
+  
+  Update the transferProcessId variable with the transfer process ID of the EDR entry to remove.
+  
+  Use this to:
+  - Clean up old or expired data endpoints
+  - Remove access to data you no longer need
+  - Free up cache space
+  
+  Note: This only removes the EDR cache entry, not the underlying:
+  - Transfer process
+  - Contract agreement
+  - Asset
+  
+  The provider may still have records of the transfer.
+}

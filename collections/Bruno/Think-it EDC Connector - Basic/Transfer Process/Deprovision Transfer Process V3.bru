@@ -1,0 +1,46 @@
+meta {
+  name: Deprovision Transfer Process V3
+  type: http
+  seq: 5
+}
+
+post {
+  url: {{management_url}}/v3/transferprocesses/{{transferProcessId}}/deprovision
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  transferProcessId: transfer-process-id-example
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    }
+  }
+}
+
+docs {
+  Request deprovisioning of resources for a completed transfer process.
+  
+  Update the transferProcessId variable with the transfer process ID.
+  
+  Use this to:
+  - Clean up provisioned resources after transfer completion
+  - Release allocated resources on provider side
+  - Trigger cleanup operations
+  
+  Typical usage:
+  1. Transfer completes (state = COMPLETED)
+  2. Data has been accessed/consumed
+  3. Request deprovisioning to clean up
+  4. Transfer moves to DEPROVISIONING → DEPROVISIONED state
+  
+  Note: Only works on COMPLETED transfers. Some providers may auto-deprovision.
+}

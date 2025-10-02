@@ -1,0 +1,38 @@
+meta {
+  name: Delete Policy Definition V3
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{management_url}}/v3/policydefinitions/{{policyId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  policyId: policy-1
+}
+
+docs {
+  Delete a policy definition by its ID.
+  
+  Update the policyId variable with the policy ID to remove.
+  
+  Important considerations:
+  - Cannot delete policies referenced by contract definitions
+  - Does not affect existing contract agreements using this policy
+  - Only removes the policy definition itself
+  
+  Best practice:
+  1. Check if policy is used in any contract definitions
+  2. Update/remove those contract definitions first
+  3. Then delete the policy
+  
+  Use cases:
+  - Remove unused or outdated policies
+  - Clean up test policies
+  - Delete policies that are no longer needed
+  
+  If deletion fails, check for contract definitions still referencing this policy.
+}

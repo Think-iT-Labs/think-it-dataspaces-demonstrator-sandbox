@@ -1,0 +1,58 @@
+meta {
+  name: Create Transfer Process V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/transferprocesses
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  counterPartyAddress: https://example-connector.dataspaces.think-it.io/api/dsp
+  contractId: agreement-id-from-negotiation
+  transferType: HttpData-PULL
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "TransferRequest",
+    "protocol": "dataspace-protocol-http",
+    "counterPartyAddress": "{{counterPartyAddress}}",
+    "contractId": "{{contractId}}",
+    "transferType": "{{transferType}}",
+    "callbackAddresses": []
+  }
+}
+
+docs {
+  Initiate a data transfer process after a successful contract negotiation.
+  
+  Variables to configure:
+  - counterPartyAddress: The DSP endpoint of the provider connector (protocol_url format)
+  - contractId: The agreement ID obtained from a finalized contract negotiation
+  - transferType: Type of transfer (typically "HttpData-PULL" or "HttpData-PUSH")
+  
+  Transfer Types:
+  - HttpData-PULL: Consumer pulls data from provider's endpoint (creates EDR entry)
+  - HttpData-PUSH: Provider pushes data to consumer's endpoint
+  
+  Workflow:
+  1. Complete contract negotiation (state = FINALIZED)
+  2. Get agreement ID from negotiation
+  3. Create transfer process with agreement ID
+  4. Poll transfer state until COMPLETED
+  5. For PULL: Use EDR cache to get data endpoint
+  6. For PUSH: Data will be sent to your callback address
+  
+  The response includes the transferProcessId needed to monitor the transfer.
+}

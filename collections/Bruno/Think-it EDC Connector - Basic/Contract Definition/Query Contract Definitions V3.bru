@@ -1,0 +1,32 @@
+meta {
+  name: Query Contract Definitions V3
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{management_url}}/v3/contractdefinitions/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "QuerySpec",
+    "offset": 0,
+    "limit": 50
+  }
+}
+
+docs {
+  Query and list all contract definitions with pagination support.
+  
+  Contract definitions link assets with policies to define what can be negotiated.
+}

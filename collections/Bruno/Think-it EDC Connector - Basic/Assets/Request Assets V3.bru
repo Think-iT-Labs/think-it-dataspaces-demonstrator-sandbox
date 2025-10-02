@@ -1,0 +1,31 @@
+meta {
+  name: Request Assets V3
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{management_url}}/v3/assets/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "QuerySpec",
+    "offset": 0,
+    "limit": 50,
+    "sortOrder": "DESC"
+  }
+}
+
+docs {
+  Query and list all assets with pagination support.
+}

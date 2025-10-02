@@ -1,0 +1,44 @@
+meta {
+  name: Update Contract Definition V3
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{management_url}}/v3/contractdefinitions
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  definitionId: contract-definition-1
+  accessPolicyId: updated-policy-id
+  contractPolicyId: updated-contract-policy-id
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@id": "{{definitionId}}",
+    "accessPolicyId": "{{accessPolicyId}}",
+    "contractPolicyId": "{{contractPolicyId}}",
+    "assetsSelector": []
+  }
+}
+
+docs {
+  Update an existing contract definition.
+  
+  Variables to configure:
+  - definitionId: ID of the contract definition to update
+  - accessPolicyId: Updated policy ID for access control
+  - contractPolicyId: Updated policy ID for contract terms
+  
+  All fields must be provided (full replacement, not partial update).
+}

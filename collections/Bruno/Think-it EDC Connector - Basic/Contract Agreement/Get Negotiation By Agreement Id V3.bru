@@ -1,0 +1,22 @@
+meta {
+  name: Get Negotiation By Agreement Id V3
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{management_url}}/v3/contractagreements/{{agreementId}}/negotiation
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  agreementId: agreement-id-example
+}
+
+docs {
+  Retrieve the contract negotiation that resulted in a specific agreement.
+  
+  Update the agreementId variable with the agreement ID.
+  This returns details about the negotiation process that led to this agreement.
+}

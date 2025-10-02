@@ -1,0 +1,43 @@
+meta {
+  name: Get Dataset V3
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{management_url}}/v3/catalog/dataset/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  datasetId: asset-test-1
+  counterPartyAddress: https://example-connector.dataspaces.think-it.io/api/dsp
+  counterPartyId: example-participant-id
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "DatasetRequest",
+    "@id": "{{datasetId}}",
+    "counterPartyAddress": "{{counterPartyAddress}}",
+    "counterPartyId": "{{counterPartyId}}",
+    "protocol": "dataspace-protocol-http"
+  }
+}
+
+docs {
+  Request detailed information about a specific dataset from another connector's catalog.
+  
+  Variables to configure:
+  - datasetId: The ID of the dataset/asset you want to retrieve details for
+  - counterPartyAddress: The DSP endpoint of the target connector (protocol_url format)
+  - counterPartyId: The participant ID of the counter party connector
+}

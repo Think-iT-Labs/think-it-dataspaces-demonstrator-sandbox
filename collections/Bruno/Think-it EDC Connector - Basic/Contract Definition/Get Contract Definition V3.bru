@@ -1,0 +1,21 @@
+meta {
+  name: Get Contract Definition V3
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{management_url}}/v3/contractdefinitions/{{definitionId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  definitionId: contract-definition-1
+}
+
+docs {
+  Retrieve a specific contract definition by its ID.
+  
+  Update the definitionId variable with the actual definition ID you want to retrieve.
+}

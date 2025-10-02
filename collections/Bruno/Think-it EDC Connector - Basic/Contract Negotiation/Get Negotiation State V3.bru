@@ -1,0 +1,28 @@
+meta {
+  name: Get Negotiation State V3
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{management_url}}/v3/contractnegotiations/{{negotiationId}}/state
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  negotiationId: negotiation-id-example
+}
+
+docs {
+  Get the current state of a contract negotiation.
+  
+  Update the negotiationId variable with the negotiation ID you want to check.
+  
+  This is a lightweight endpoint to check negotiation progress without fetching full details.
+  Useful for polling until the state becomes FINALIZED.
+  
+  Common states:
+  - REQUESTING → REQUESTED → OFFERED → ACCEPTED → AGREED → VERIFIED → FINALIZED
+  - Or TERMINATED if cancelled
+}

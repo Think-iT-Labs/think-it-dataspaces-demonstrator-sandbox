@@ -1,0 +1,45 @@
+meta {
+  name: Create Asset V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/assets
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+      "dcat": "http://www.w3.org/ns/dcat#"
+    },
+    "@id": "asset-test-1",
+    "properties": {
+      "dcat:title": "Test Asset",
+      "dcat:description": "A test asset for Think-it EDC Connector",
+      "dcat:language": "en",
+      "dcat:organization": "Think-it GmbH"
+    },
+    "privateProperties": {
+      "privateKey": "privateValue"
+    },
+    "dataAddress": {
+      "type": "HttpData",
+      "name": "Test Data",
+      "baseUrl": "https://example.com/data"
+    }
+  }
+}
+
+docs {
+  Create a new asset in the EDC connector.
+  
+  The asset ID should be unique across the connector.
+}

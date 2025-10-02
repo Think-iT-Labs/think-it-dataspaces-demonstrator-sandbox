@@ -1,0 +1,33 @@
+meta {
+  name: Get Policy Definition V3
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{management_url}}/v3/policydefinitions/{{policyId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  policyId: policy-1
+}
+
+docs {
+  Retrieve a specific policy definition by its ID.
+  
+  Update the policyId variable with the actual policy ID.
+  
+  Use this to:
+  - Review policy details before using in contract definitions
+  - Verify policy constraints and rules
+  - Inspect ODRL policy structure
+  - Check which permissions/prohibitions are defined
+  
+  The response includes the complete ODRL policy with:
+  - All permissions, prohibitions, and obligations
+  - Constraints with leftOperand, operator, rightOperand
+  - Action types (use, transfer, etc.)
+  - Policy metadata
+}

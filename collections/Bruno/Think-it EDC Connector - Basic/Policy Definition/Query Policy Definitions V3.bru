@@ -1,0 +1,48 @@
+meta {
+  name: Query Policy Definitions V3
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{management_url}}/v3/policydefinitions/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "QuerySpec",
+    "offset": 0,
+    "limit": 50,
+    "filterExpression": []
+  }
+}
+
+docs {
+  Query and list all policy definitions with pagination support.
+  
+  Policy definitions contain the rules (ODRL policies) that govern:
+  - Who can see assets (access policies)
+  - How assets can be used (contract policies)
+  
+  Returns all policies including:
+  - Policy ID
+  - ODRL policy structure (permissions, prohibitions, obligations)
+  - Constraints and rules
+  - Creation metadata
+  
+  Use filterExpression to search for specific policies by ID or properties.
+  
+  Policies are referenced by:
+  - Contract Definitions (accessPolicyId, contractPolicyId)
+  - Contract Offers in catalog
+  - Contract Agreements after negotiation
+}

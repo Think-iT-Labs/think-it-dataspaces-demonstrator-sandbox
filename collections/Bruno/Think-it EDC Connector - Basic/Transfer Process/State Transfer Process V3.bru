@@ -1,0 +1,32 @@
+meta {
+  name: State Transfer Process V3
+  type: http
+  seq: 4
+}
+
+get {
+  url: {{management_url}}/v3/transferprocesses/{{transferProcessId}}/state
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  transferProcessId: transfer-process-id-example
+}
+
+docs {
+  Get the current state of a transfer process.
+  
+  Update the transferProcessId variable with the transfer process ID.
+  
+  This is a lightweight endpoint to check transfer progress without fetching full details.
+  Useful for polling until the state becomes COMPLETED.
+  
+  State progression (typical):
+  INITIAL → PROVISIONING → PROVISIONED → REQUESTING → REQUESTED 
+  → STARTING → STARTED → COMPLETING → COMPLETED
+  
+  Or TERMINATED if cancelled/failed.
+  
+  Poll this endpoint every 2-5 seconds until COMPLETED or TERMINATED.
+}

@@ -1,0 +1,32 @@
+meta {
+  name: Query Agreements V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/contractagreements/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "QuerySpec",
+    "offset": 0,
+    "limit": 50
+  }
+}
+
+docs {
+  Query and list all contract agreements with pagination support.
+  
+  Returns all agreements that have been finalized between this connector and others.
+}

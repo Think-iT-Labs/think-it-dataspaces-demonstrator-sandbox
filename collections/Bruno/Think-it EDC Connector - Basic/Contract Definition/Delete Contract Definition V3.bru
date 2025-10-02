@@ -1,0 +1,23 @@
+meta {
+  name: Delete Contract Definition V3
+  type: http
+  seq: 5
+}
+
+delete {
+  url: {{management_url}}/v3/contractdefinitions/{{definitionId}}
+  body: none
+  auth: inherit
+}
+
+vars:pre-request {
+  definitionId: contract-definition-1
+}
+
+docs {
+  Delete a contract definition by its ID.
+  
+  Update the definitionId variable with the definition ID you want to remove.
+  
+  Note: Deleting a contract definition does not affect existing agreements made using it.
+}

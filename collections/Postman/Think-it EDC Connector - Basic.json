@@ -1,0 +1,1713 @@
+{
+  "info": {
+    "name": "Think-it EDC Connector - Basic",
+    "description": "A comprehensive collection of API requests for Think-it EDC Connector in its Basic Variants (made for demonstrator purposes only)\n\nMaintained by Think-it GmbH - [https://think-it.io](https://think-it.io)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Contract Definition",
+      "item": [
+        {
+          "name": "Create Contract Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"definitionId\", \"contract-definition-1\");",
+                  "pm.variables.set(\"accessPolicyId\", \"policy-1\");",
+                  "pm.variables.set(\"contractPolicyId\", \"policy-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Create a new contract definition.\n\nVariables to configure:\n- definitionId: Unique identifier for this contract definition\n- accessPolicyId: Policy ID that controls who can access/see the assets\n- contractPolicyId: Policy ID that defines the terms of use for the assets\n\nThe assetsSelector array can contain criteria to select which assets this definition applies to.\nAn empty array means it applies to all assets.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractdefinitions",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractdefinitions"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@id\": \"{{definitionId}}\",\n  \"accessPolicyId\": \"{{accessPolicyId}}\",\n  \"contractPolicyId\": \"{{contractPolicyId}}\",\n  \"assetsSelector\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Contract Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"definitionId\", \"contract-definition-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Delete a contract definition by its ID.\n\nUpdate the definitionId variable with the definition ID you want to remove.\n\nNote: Deleting a contract definition does not affect existing agreements made using it.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractdefinitions/{{definitionId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractdefinitions",
+                "{{definitionId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Contract Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"definitionId\", \"contract-definition-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve a specific contract definition by its ID.\n\nUpdate the definitionId variable with the actual definition ID you want to retrieve.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractdefinitions/{{definitionId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractdefinitions",
+                "{{definitionId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Query Contract Definitions V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all contract definitions with pagination support.\n\nContract definitions link assets with policies to define what can be negotiated.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractdefinitions/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractdefinitions",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Contract Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"definitionId\", \"contract-definition-1\");",
+                  "pm.variables.set(\"accessPolicyId\", \"policy-1\");",
+                  "pm.variables.set(\"contractPolicyId\", \"policy-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Update an existing contract definition.\n\nVariables to configure:\n- definitionId: ID of the contract definition to update\n- accessPolicyId: Updated policy ID for access control\n- contractPolicyId: Updated policy ID for contract terms\n\nAll fields must be provided (full replacement, not partial update).",
+            "url": {
+              "raw": "{{management_url}}/v3/contractdefinitions",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractdefinitions"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@id\": \"{{definitionId}}\",\n  \"accessPolicyId\": \"{{accessPolicyId}}\",\n  \"contractPolicyId\": \"{{contractPolicyId}}\",\n  \"assetsSelector\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contract Negotiation",
+      "item": [
+        {
+          "name": "Get Agreement For Negotiation V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"negotiationId\", \"negotiation-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve the contract agreement resulting from a finalized negotiation.\n\nUpdate the negotiationId variable with the negotiation ID.\n\nThis endpoint only works if the negotiation state is FINALIZED.\nReturns the full contract agreement including:\n- Agreement ID (needed for data transfer)\n- Asset details\n- Policy terms\n- Signing information\n\nUse the agreement ID from this response to initiate a transfer process.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractnegotiations/{{negotiationId}}/agreement",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractnegotiations",
+                "{{negotiationId}}",
+                "agreement"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Negotiation State V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"negotiationId\", \"negotiation-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Get the current state of a contract negotiation.\n\nUpdate the negotiationId variable with the negotiation ID you want to check.\n\nThis is a lightweight endpoint to check negotiation progress without fetching full details.\nUseful for polling until the state becomes FINALIZED.\n\nCommon states:\n- REQUESTING \u2192 REQUESTED \u2192 OFFERED \u2192 ACCEPTED \u2192 AGREED \u2192 VERIFIED \u2192 FINALIZED\n- Or TERMINATED if cancelled",
+            "url": {
+              "raw": "{{management_url}}/v3/contractnegotiations/{{negotiationId}}/state",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractnegotiations",
+                "{{negotiationId}}",
+                "state"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Negotiation V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"negotiationId\", \"negotiation-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve detailed information about a specific contract negotiation.\n\nUpdate the negotiationId variable with the actual negotiation ID.\nNegotiation IDs are returned when you initiate a negotiation or from the Query Negotiations endpoint.\n\nThe response includes:\n- Current state of the negotiation\n- Counter party information\n- Contract offer details\n- Agreement ID (if finalized)",
+            "url": {
+              "raw": "{{management_url}}/v3/contractnegotiations/{{negotiationId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractnegotiations",
+                "{{negotiationId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Initiate Contract Negotiation V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"counterPartyAddress\", \"https://example-connector.dataspaces.think-it.io/api/dsp\");",
+                  "pm.variables.set(\"counterPartyId\", \"example-participant-id\");",
+                  "pm.variables.set(\"offerId\", \"offer-id-from-catalog\");",
+                  "pm.variables.set(\"assetId\", \"asset-test-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Initiate a contract negotiation with another connector.\n\nVariables to configure:\n- counterPartyAddress: The DSP endpoint of the provider connector (protocol_url format, e.g., https://example.io/api/dsp)\n- counterPartyId: The participant ID of the provider connector\n- offerId: The offer ID obtained from the catalog request (format: assetId:policyId:definitionId)\n- assetId: The target asset ID you want to negotiate access to\n\nWorkflow:\n1. Request catalog from provider connector\n2. Find the asset and offer you want\n3. Copy the offer ID and other details\n4. Initiate negotiation with these values\n5. Poll negotiation status until FINALIZED\n6. Use resulting agreement for transfer",
+            "url": {
+              "raw": "{{management_url}}/v3/contractnegotiations",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractnegotiations"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"ContractRequest\",\n  \"counterPartyAddress\": \"{{counterPartyAddress}}\",\n  \"protocol\": \"dataspace-protocol-http\",\n  \"policy\": {\n    \"@context\": \"http://www.w3.org/ns/odrl.jsonld\",\n    \"@type\": \"odrl:Offer\",\n    \"@id\": \"{{offerId}}\",\n    \"assigner\": \"{{counterPartyId}}\",\n    \"odrl:permission\": {\n      \"odrl:action\": {\n        \"@id\": \"use\"\n      }\n    },\n    \"odrl:prohibition\": [],\n    \"odrl:obligation\": [],\n    \"target\": \"{{assetId}}\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Query Negotiations V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all contract negotiations with pagination support.\n\nReturns negotiations in various states:\n- REQUESTING: Initial state\n- REQUESTED: Request sent to provider\n- OFFERING/OFFERED: Provider made an offer\n- ACCEPTING/ACCEPTED: Consumer accepted the offer\n- AGREEING/AGREED: Both parties agreed\n- VERIFIED: Verification complete\n- FINALIZED: Negotiation successful, agreement created\n- TERMINATING/TERMINATED: Negotiation was terminated\n\nUse this to monitor negotiation progress.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractnegotiations/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractnegotiations",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Terminate Negotiation V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"negotiationId\", \"negotiation-id-example\");",
+                  "pm.variables.set(\"terminationReason\", \"No longer needed\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Terminate an ongoing contract negotiation.\n\nVariables to configure:\n- negotiationId: The negotiation ID you want to terminate\n- terminationReason: Human-readable reason for termination\n\nThis can be used to cancel negotiations that:\n- Are taking too long\n- Are no longer needed\n- Have incorrect parameters\n\nNote: Only works on negotiations that are not yet FINALIZED or already TERMINATED.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractnegotiations/{{negotiationId}}/terminate",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractnegotiations",
+                "{{negotiationId}}",
+                "terminate"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"TerminateNegotiation\",\n  \"reason\": \"{{terminationReason}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Assets",
+      "item": [
+        {
+          "name": "Create Asset V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Create a new asset in the EDC connector.\n\nThe asset ID should be unique across the connector.",
+            "url": {
+              "raw": "{{management_url}}/v3/assets",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "assets"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\",\n    \"dcat\": \"http://www.w3.org/ns/dcat#\"\n  },\n  \"@id\": \"asset-test-1\",\n  \"properties\": {\n    \"dcat:title\": \"Test Asset\",\n    \"dcat:description\": \"A test asset for Think-it EDC Connector\",\n    \"dcat:language\": \"en\",\n    \"dcat:organization\": \"Think-it GmbH\"\n  },\n  \"privateProperties\": {\n    \"privateKey\": \"privateValue\"\n  },\n  \"dataAddress\": {\n    \"type\": \"HttpData\",\n    \"name\": \"Test Data\",\n    \"baseUrl\": \"https://example.com/data\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Asset V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"assetId\", \"asset-test-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve a specific asset by its ID.\n\nUpdate the assetId variable with the actual asset ID you want to retrieve.",
+            "url": {
+              "raw": "{{management_url}}/v3/assets/{{assetId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "assets",
+                "{{assetId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Remove Asset V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"assetId\", \"asset-test-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Delete an asset by its ID.\n\nUpdate the assetId variable with the asset ID you want to remove.",
+            "url": {
+              "raw": "{{management_url}}/v3/assets/{{assetId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "assets",
+                "{{assetId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Request Assets V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all assets with pagination support.",
+            "url": {
+              "raw": "{{management_url}}/v3/assets/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "assets",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50,\n  \"sortOrder\": \"DESC\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Asset V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"assetId\", \"asset-test-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Update an existing asset.\n\nSet the assetId variable to match the asset you want to update.",
+            "url": {
+              "raw": "{{management_url}}/v3/assets",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "assets"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\",\n    \"dcat\": \"http://www.w3.org/ns/dcat#\"\n  },\n  \"@id\": \"{{assetId}}\",\n  \"properties\": {\n    \"dcat:title\": \"Updated Asset\",\n    \"dcat:description\": \"An updated test asset\",\n    \"dcat:language\": \"en\",\n    \"dcat:organization\": \"Think-it GmbH\"\n  },\n  \"privateProperties\": {\n    \"privateKey\": \"updatedPrivateValue\"\n  },\n  \"dataAddress\": {\n    \"type\": \"HttpData\",\n    \"name\": \"Updated Data\",\n    \"baseUrl\": \"https://example.com/updated-data\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Policy Definition",
+      "item": [
+        {
+          "name": "Create Policy Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"policyId\", \"policy-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Create a new policy definition using ODRL (Open Digital Rights Language).\n\nVariables to configure:\n- policyId: Unique identifier for this policy\n\nPolicy Structure:\n- permission: Actions that are allowed (e.g., \"use\", \"transfer\")\n- prohibition: Actions that are forbidden\n- obligation: Actions that must be performed\n- constraint: Conditions that must be met\n\nCommon constraint examples:\n- Time-based: POLICY_EVALUATION_TIME < \"2025-12-31\"\n- Connector-based: REFERRING_CONNECTOR = \"specific-connector-id\"\n- Location-based: spatial = \"Germany\"\n- Purpose-based: purpose = \"research\"\n\nThis is an \"always allow\" policy (no constraints).\nUse in Contract Definitions as accessPolicyId or contractPolicyId.",
+            "url": {
+              "raw": "{{management_url}}/v3/policydefinitions",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "policydefinitions"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@id\": \"{{policyId}}\",\n  \"policy\": {\n    \"@context\": \"http://www.w3.org/ns/odrl.jsonld\",\n    \"@type\": \"Set\",\n    \"permission\": [\n      {\n        \"action\": \"use\",\n        \"constraint\": []\n      }\n    ],\n    \"obligation\": [],\n    \"prohibition\": []\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Delete Policy Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"policyId\", \"policy-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Delete a policy definition by its ID.\n\nUpdate the policyId variable with the policy ID to remove.\n\nImportant considerations:\n- Cannot delete policies referenced by contract definitions\n- Does not affect existing contract agreements using this policy\n- Only removes the policy definition itself\n\nBest practice:\n1. Check if policy is used in any contract definitions\n2. Update/remove those contract definitions first\n3. Then delete the policy\n\nUse cases:\n- Remove unused or outdated policies\n- Clean up test policies\n- Delete policies that are no longer needed\n\nIf deletion fails, check for contract definitions still referencing this policy.",
+            "url": {
+              "raw": "{{management_url}}/v3/policydefinitions/{{policyId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "policydefinitions",
+                "{{policyId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Policy Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"policyId\", \"policy-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve a specific policy definition by its ID.\n\nUpdate the policyId variable with the actual policy ID.\n\nUse this to:\n- Review policy details before using in contract definitions\n- Verify policy constraints and rules\n- Inspect ODRL policy structure\n- Check which permissions/prohibitions are defined\n\nThe response includes the complete ODRL policy with:\n- All permissions, prohibitions, and obligations\n- Constraints with leftOperand, operator, rightOperand\n- Action types (use, transfer, etc.)\n- Policy metadata",
+            "url": {
+              "raw": "{{management_url}}/v3/policydefinitions/{{policyId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "policydefinitions",
+                "{{policyId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Query Policy Definitions V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all policy definitions with pagination support.\n\nPolicy definitions contain the rules (ODRL policies) that govern:\n- Who can see assets (access policies)\n- How assets can be used (contract policies)\n\nReturns all policies including:\n- Policy ID\n- ODRL policy structure (permissions, prohibitions, obligations)\n- Constraints and rules\n- Creation metadata\n\nUse filterExpression to search for specific policies by ID or properties.\n\nPolicies are referenced by:\n- Contract Definitions (accessPolicyId, contractPolicyId)\n- Contract Offers in catalog\n- Contract Agreements after negotiation",
+            "url": {
+              "raw": "{{management_url}}/v3/policydefinitions/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "policydefinitions",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50,\n  \"filterExpression\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Update Policy Definition V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"policyId\", \"policy-1\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "PUT",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Update an existing policy definition.\n\nUpdate the policyId variable with the policy ID to modify.\n\nThis is a full replacement update - all policy fields must be provided.\nThe example includes a spatial constraint (location = Germany).\n\nCommon constraint patterns:\n\nTime constraint:\n{\n  \"leftOperand\": \"POLICY_EVALUATION_TIME\",\n  \"operator\": \"lt\",\n  \"rightOperand\": \"2025-12-31T23:59:59Z\"\n}\n\nConnector constraint:\n{\n  \"leftOperand\": \"REFERRING_CONNECTOR\",\n  \"operator\": \"eq\",\n  \"rightOperand\": \"connector-id\"\n}\n\nMultiple constraints (AND):\n{\n  \"and\": [\n    { constraint1 },\n    { constraint2 }\n  ]\n}\n\nNote: Updates affect future negotiations, not existing agreements.",
+            "url": {
+              "raw": "{{management_url}}/v3/policydefinitions/{{policyId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "policydefinitions",
+                "{{policyId}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@id\": \"{{policyId}}\",\n  \"policy\": {\n    \"@context\": \"http://www.w3.org/ns/odrl.jsonld\",\n    \"@type\": \"Set\",\n    \"permission\": [\n      {\n        \"action\": \"use\",\n        \"constraint\": [\n          {\n            \"leftOperand\": \"spatial\",\n            \"operator\": \"eq\",\n            \"rightOperand\": \"https://www.wikidata.org/wiki/Q183\"\n          }\n        ]\n      }\n    ],\n    \"obligation\": [],\n    \"prohibition\": []\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Contract Agreement",
+      "item": [
+        {
+          "name": "Get Agreement By Id V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"agreementId\", \"agreement-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve a specific contract agreement by its ID.\n\nUpdate the agreementId variable with the actual agreement ID you want to retrieve.\nAgreement IDs are typically returned from the Query Agreements endpoint or after a successful negotiation.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractagreements/{{agreementId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractagreements",
+                "{{agreementId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Get Negotiation By Agreement Id V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"agreementId\", \"agreement-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve the contract negotiation that resulted in a specific agreement.\n\nUpdate the agreementId variable with the agreement ID.\nThis returns details about the negotiation process that led to this agreement.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractagreements/{{agreementId}}/negotiation",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractagreements",
+                "{{agreementId}}",
+                "negotiation"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Query Agreements V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all contract agreements with pagination support.\n\nReturns all agreements that have been finalized between this connector and others.",
+            "url": {
+              "raw": "{{management_url}}/v3/contractagreements/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "contractagreements",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "EDR Cache",
+      "item": [
+        {
+          "name": "Get EDR Entry Data Address V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve the data address (endpoint details) for a specific EDR entry.\n\nUpdate the transferProcessId variable with the transfer process ID.\nTransfer process IDs are obtained from:\n- The Create Transfer Process response\n- Query Transfer Process results\n- Request EDR Entries results\n\nThe data address contains:\n- Endpoint URL where data can be accessed\n- Authentication method (e.g., bearer token, API key)\n- Authorization credentials\n- Additional endpoint properties\n\nUse this information to make actual data requests to the provider's endpoint.",
+            "url": {
+              "raw": "{{management_url}}/v3/edrs/{{transferProcessId}}/dataaddress",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "edrs",
+                "{{transferProcessId}}",
+                "dataaddress"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Remove EDR Entry V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Remove an EDR entry from the cache.\n\nUpdate the transferProcessId variable with the transfer process ID of the EDR entry to remove.\n\nUse this to:\n- Clean up old or expired data endpoints\n- Remove access to data you no longer need\n- Free up cache space\n\nNote: This only removes the EDR cache entry, not the underlying:\n- Transfer process\n- Contract agreement\n- Asset\n\nThe provider may still have records of the transfer.",
+            "url": {
+              "raw": "{{management_url}}/v3/edrs/{{transferProcessId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "edrs",
+                "{{transferProcessId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Request EDR Entries V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all EDR (Endpoint Data Reference) cache entries with pagination.\n\nEDR entries are created when:\n- A transfer process completes successfully with transferType \"HttpData-PULL\"\n- The provider sends data endpoint information\n\nEach EDR entry contains:\n- Transfer process ID\n- Agreement ID\n- Asset ID\n- Data endpoint information (address, authentication, etc.)\n\nUse this to see all available data endpoints you can access.",
+            "url": {
+              "raw": "{{management_url}}/v3/edrs/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "edrs",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Catalog",
+      "item": [
+        {
+          "name": "Get Dataset V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"datasetId\", \"asset-test-1\");",
+                  "pm.variables.set(\"counterPartyAddress\", \"https://example-connector.dataspaces.think-it.io/api/dsp\");",
+                  "pm.variables.set(\"counterPartyId\", \"example-participant-id\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Request detailed information about a specific dataset from another connector's catalog.\n\nVariables to configure:\n- datasetId: The ID of the dataset/asset you want to retrieve details for\n- counterPartyAddress: The DSP endpoint of the target connector (protocol_url format)\n- counterPartyId: The participant ID of the counter party connector",
+            "url": {
+              "raw": "{{management_url}}/v3/catalog/dataset/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "catalog",
+                "dataset",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"DatasetRequest\",\n  \"@id\": \"{{datasetId}}\",\n  \"counterPartyAddress\": \"{{counterPartyAddress}}\",\n  \"counterPartyId\": \"{{counterPartyId}}\",\n  \"protocol\": \"dataspace-protocol-http\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Request Catalog V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"counterPartyAddress\", \"https://example-connector.dataspaces.think-it.io/api/dsp\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Request the catalog from another EDC connector.\n\nUpdate counterPartyAddress with the DSP endpoint of the target connector.\nThis typically uses the protocol_url format (ending with /api/dsp).",
+            "url": {
+              "raw": "{{management_url}}/v3/catalog/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "catalog",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"protocol\": \"dataspace-protocol-http\",\n  \"counterPartyAddress\": \"{{counterPartyAddress}}\",\n  \"querySpec\": {\n    \"limit\": 50,\n    \"offset\": 0\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Transfer Process",
+      "item": [
+        {
+          "name": "Create Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"counterPartyAddress\", \"https://example-connector.dataspaces.think-it.io/api/dsp\");",
+                  "pm.variables.set(\"contractId\", \"agreement-id-from-negotiation\");",
+                  "pm.variables.set(\"transferType\", \"HttpData-PULL\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Initiate a data transfer process after a successful contract negotiation.\n\nVariables to configure:\n- counterPartyAddress: The DSP endpoint of the provider connector (protocol_url format)\n- contractId: The agreement ID obtained from a finalized contract negotiation\n- transferType: Type of transfer (typically \"HttpData-PULL\" or \"HttpData-PUSH\")\n\nTransfer Types:\n- HttpData-PULL: Consumer pulls data from provider's endpoint (creates EDR entry)\n- HttpData-PUSH: Provider pushes data to consumer's endpoint\n\nWorkflow:\n1. Complete contract negotiation (state = FINALIZED)\n2. Get agreement ID from negotiation\n3. Create transfer process with agreement ID\n4. Poll transfer state until COMPLETED\n5. For PULL: Use EDR cache to get data endpoint\n6. For PUSH: Data will be sent to your callback address\n\nThe response includes the transferProcessId needed to monitor the transfer.",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"TransferRequest\",\n  \"protocol\": \"dataspace-protocol-http\",\n  \"counterPartyAddress\": \"{{counterPartyAddress}}\",\n  \"contractId\": \"{{contractId}}\",\n  \"transferType\": \"{{transferType}}\",\n  \"callbackAddresses\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Deprovision Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Request deprovisioning of resources for a completed transfer process.\n\nUpdate the transferProcessId variable with the transfer process ID.\n\nUse this to:\n- Clean up provisioned resources after transfer completion\n- Release allocated resources on provider side\n- Trigger cleanup operations\n\nTypical usage:\n1. Transfer completes (state = COMPLETED)\n2. Data has been accessed/consumed\n3. Request deprovisioning to clean up\n4. Transfer moves to DEPROVISIONING \u2192 DEPROVISIONED state\n\nNote: Only works on COMPLETED transfers. Some providers may auto-deprovision.",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/{{transferProcessId}}/deprovision",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "{{transferProcessId}}",
+                "deprovision"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Get Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Retrieve detailed information about a specific transfer process.\n\nUpdate the transferProcessId variable with the actual transfer process ID.\nTransfer process IDs are returned from:\n- Create Transfer Process response\n- Query Transfer Process results\n\nThe response includes:\n- Current state\n- Agreement ID\n- Asset ID\n- Counter party information\n- Transfer type\n- Data destination (for PUSH transfers)\n- State timestamps\n- Error details (if failed)",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/{{transferProcessId}}",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "{{transferProcessId}}"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Query Transfer Process V3",
+          "event": [],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Query and list all transfer processes with pagination support.\n\nReturns transfers in various states:\n- INITIAL: Just created\n- PROVISIONING/PROVISIONED: Preparing resources\n- REQUESTING/REQUESTED: Requesting data transfer\n- STARTING/STARTED: Transfer beginning\n- COMPLETING/COMPLETED: Transfer finished successfully\n- TERMINATING/TERMINATED: Transfer cancelled\n- DEPROVISIONING/DEPROVISIONED: Resources cleaned up\n- SUSPENDED: Transfer paused\n\nUse filterExpression to narrow results by:\n- State (e.g., only COMPLETED transfers)\n- Agreement ID\n- Asset ID\n- Counter party",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/request",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "request"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"QuerySpec\",\n  \"offset\": 0,\n  \"limit\": 50,\n  \"filterExpression\": []\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Resume Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Resume a previously suspended transfer process.\n\nUpdate the transferProcessId variable with the transfer process ID.\n\nThis endpoint resumes transfers that were suspended using the Suspend endpoint.\n\nRequirements:\n- Transfer must be in SUSPENDED state\n- Cannot resume COMPLETED, TERMINATED, or active transfers\n\nAfter resuming:\n- Transfer continues from where it was suspended\n- State changes from SUSPENDED back to active state\n- Transfer process continues normal flow\n\nUse cases:\n- Temporary network issues resolved\n- Maintenance window completed\n- Rate limiting constraints lifted",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/{{transferProcessId}}/resume",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "{{transferProcessId}}",
+                "resume"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "State Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Get the current state of a transfer process.\n\nUpdate the transferProcessId variable with the transfer process ID.\n\nThis is a lightweight endpoint to check transfer progress without fetching full details.\nUseful for polling until the state becomes COMPLETED.\n\nState progression (typical):\nINITIAL \u2192 PROVISIONING \u2192 PROVISIONED \u2192 REQUESTING \u2192 REQUESTED \n\u2192 STARTING \u2192 STARTED \u2192 COMPLETING \u2192 COMPLETED\n\nOr TERMINATED if cancelled/failed.\n\nPoll this endpoint every 2-5 seconds until COMPLETED or TERMINATED.",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/{{transferProcessId}}/state",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "{{transferProcessId}}",
+                "state"
+              ],
+              "query": [],
+              "variable": []
+            }
+          }
+        },
+        {
+          "name": "Suspend Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");",
+                  "pm.variables.set(\"suspensionReason\", \"Temporary suspension for maintenance\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Suspend an active transfer process.\n\nVariables to configure:\n- transferProcessId: The transfer process ID to suspend\n- suspensionReason: Human-readable reason for suspension\n\nUse this to:\n- Pause transfers during maintenance windows\n- Temporarily stop transfers due to network issues\n- Control transfer rate/timing\n- Pause while investigating issues\n\nRequirements:\n- Transfer must be in an active state (STARTED, REQUESTING, etc.)\n- Cannot suspend COMPLETED or TERMINATED transfers\n\nAfter suspending:\n- Transfer state changes to SUSPENDED\n- Transfer activity pauses\n- Use Resume endpoint to continue later\n\nNote: Provider must support suspension (not all implementations do).",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/{{transferProcessId}}/suspend",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "{{transferProcessId}}",
+                "suspend"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"reason\": \"{{suspensionReason}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        },
+        {
+          "name": "Terminate Transfer Process V3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.variables.set(\"transferProcessId\", \"transfer-process-id-example\");",
+                  "pm.variables.set(\"terminationReason\", \"No longer needed\");"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "disabled": false,
+                "type": "default"
+              }
+            ],
+            "auth": {
+              "type": "inherit"
+            },
+            "description": "Terminate an active transfer process permanently.\n\nVariables to configure:\n- transferProcessId: The transfer process ID to terminate\n- terminationReason: Human-readable reason for termination\n\nUse this to:\n- Cancel transfers that are no longer needed\n- Stop failed/stuck transfers\n- Clean up transfers with errors\n- Abort transfers started by mistake\n\nRequirements:\n- Transfer must not already be TERMINATED or COMPLETED\n- Cannot terminate already finished transfers\n\nAfter terminating:\n- Transfer state changes to TERMINATING \u2192 TERMINATED\n- Transfer activity stops permanently\n- Cannot be resumed (unlike suspension)\n- Resources are cleaned up\n\nNote: This is permanent. Use Suspend if you might want to resume later.",
+            "url": {
+              "raw": "{{management_url}}/v3/transferprocesses/{{transferProcessId}}/terminate",
+              "protocol": "",
+              "host": [
+                "{{management_url}}"
+              ],
+              "path": [
+                "v3",
+                "transferprocesses",
+                "{{transferProcessId}}",
+                "terminate"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"@context\": {\n    \"@vocab\": \"https://w3id.org/edc/v0.0.1/ns/\"\n  },\n  \"@type\": \"TerminateTransfer\",\n  \"reason\": \"{{terminationReason}}\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "https://aws-cloud.dataspace-sandbox.think-it.io",
+      "type": "default"
+    },
+    {
+      "key": "management_url",
+      "value": "{{base_url}}/api/management",
+      "type": "default"
+    },
+    {
+      "key": "protocol_url",
+      "value": "{{base_url}}/api/dsp",
+      "type": "default"
+    },
+    {
+      "key": "api_key",
+      "value": "your-api-key",
+      "type": "default"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{api_key}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  }
+}

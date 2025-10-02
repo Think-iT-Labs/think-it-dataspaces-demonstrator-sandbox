@@ -1,0 +1,42 @@
+meta {
+  name: Request EDR Entries V3
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{management_url}}/v3/edrs/request
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    },
+    "@type": "QuerySpec",
+    "offset": 0,
+    "limit": 50
+  }
+}
+
+docs {
+  Query and list all EDR (Endpoint Data Reference) cache entries with pagination.
+  
+  EDR entries are created when:
+  - A transfer process completes successfully with transferType "HttpData-PULL"
+  - The provider sends data endpoint information
+  
+  Each EDR entry contains:
+  - Transfer process ID
+  - Agreement ID
+  - Asset ID
+  - Data endpoint information (address, authentication, etc.)
+  
+  Use this to see all available data endpoints you can access.
+}

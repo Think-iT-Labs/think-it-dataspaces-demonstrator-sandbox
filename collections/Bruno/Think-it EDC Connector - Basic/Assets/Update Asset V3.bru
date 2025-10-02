@@ -1,0 +1,49 @@
+meta {
+  name: Update Asset V3
+  type: http
+  seq: 4
+}
+
+put {
+  url: {{management_url}}/v3/assets
+  body: json
+  auth: inherit
+}
+
+headers {
+  Content-Type: application/json
+}
+
+vars:pre-request {
+  assetId: asset-test-1
+}
+
+body:json {
+  {
+    "@context": {
+      "@vocab": "https://w3id.org/edc/v0.0.1/ns/",
+      "dcat": "http://www.w3.org/ns/dcat#"
+    },
+    "@id": "{{assetId}}",
+    "properties": {
+      "dcat:title": "Updated Asset",
+      "dcat:description": "An updated test asset",
+      "dcat:language": "en",
+      "dcat:organization": "Think-it GmbH"
+    },
+    "privateProperties": {
+      "privateKey": "updatedPrivateValue"
+    },
+    "dataAddress": {
+      "type": "HttpData",
+      "name": "Updated Data",
+      "baseUrl": "https://example.com/updated-data"
+    }
+  }
+}
+
+docs {
+  Update an existing asset.
+  
+  Set the assetId variable to match the asset you want to update.
+}
