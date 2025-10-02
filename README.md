@@ -2,8 +2,6 @@
 
 AWS Sandbox for Think-it Data Spaces Demonstrator
 
----
-
 ## Postman Configuration Guide
 
 ### Configuring Postman to Interact with the Connector
@@ -14,47 +12,47 @@ AWS Sandbox for Think-it Data Spaces Demonstrator
 
 2. **Set Up Environment Variables**:
    - Define the following variables in your Postman environment:
-     - `baseUrl`: The base URL of your connector's HTTP API.
-     - `s3Bucket`: The name of your S3 bucket (if applicable).
+     - `base_url`: The base URL of your connector's HTTP API.
 
 3. **Authentication**:
-   - Ensure that the necessary authentication headers (e.g., API keys or tokens) are configured in the Postman collection.
+   - Ensure that the necessary authentication header `api_key` is configured in the Postman collection.
 
 4. **Testing Data Exchange**:
-   - Use the provided requests to interact with the connector:
-     - HTTP API: Test endpoints for creating, retrieving, and managing data.
-     - S3 Bucket: Test operations for uploading, downloading, and managing files.
-
----
+   - Use the provided requests to interact with the connector.
 
 ## Lab Phases
 
-### Phase 1: Secure and Sovereign Integration
+### Phase 1: Secure and Sovereign Data Integration
+
 - **Task 1.1**: Create an asset in the data space.
 - **Task 1.2**: Define a policy for data usage.
 - **Task 1.3**: Create a contract definition to enforce the policy.
 
 ### Phase 2: Discovery & Assessment
+
 - **Task 2.1**: Query the catalog to discover available datasets.
 - **Task 2.2**: Assess the quality and relevance of the discovered datasets based on available metadata.
 
 ### Phase 3: Contract Negotiation & Policy Configuration
-- **Task 3.1**: Initiate a contract negotiation with another participant.
-- **Task 3.2**: Monitor the negotiation process and finalize the agreement.
+
+- **Task 3.1**: Create a Policy.
+- **Task 3.2**: Initiate a contract negotiation with another participant.
+- **Task 3.3**: Monitor the negotiation process and finalize the agreement.
 
 ### Phase 4: Data Transfer & Integration
+
 - **Task 4.1**: Initiate a data transfer process.
 - **Task 4.2**: Verify the successful transfer of data.
 - **Task 4.3**: Integrate the received data into your internal system.
 
 ### Phase 5: Reporting & Verification
-- **Task 5.1**: Generate a report based on the exchanged data.
 
----
+- **Task 5.1**: Generate a report based on the exchanged data.
 
 ## Gamification Checklist
 
-Participants can use the following checklist to track their progress. 
+Participants can use the following checklist to track their progress.
+
 Judges will use this to assign scores and incentivize the lab session.
 
 ### Lab Checklist
@@ -73,8 +71,6 @@ Judges will use this to assign scores and incentivize the lab session.
 - [ ] **(10 points)** Complete Task 5.1: Generate a report based on the exchanged data.
 - [ ] **(5 points)** Submit final reports and verification results for review.
 
----
-
 ## Participants of the Data Space
 
 | Lab Persona                                   | Participant ID          |
@@ -84,8 +80,6 @@ Judges will use this to assign scores and incentivize the lab session.
 | Renault - Strategic Mobility Partner          | CAR_MANUFACTURER_2      |
 | EMT Madrid - Public Transport Authority       | EMT_MADRID              |
 | Madrid Road Maintenance Company               | ROADS_COMPANY_SL        |
-
----
 
 ## Additional Resources
 
