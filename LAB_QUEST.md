@@ -29,7 +29,6 @@ Use the **Create Asset V3** request. Modify the request body:
 
 ```json
 "dataAddress": {
-    "@type": "DataAddress",
     "type": "AmazonS3",
     "objectName": "your-data-file.json",
     "region": "<REPLACE WITH THE BUCKET REGION>",
@@ -53,17 +52,6 @@ Use the **Create Contract Definition V3** request:
   - `definitionId`: Your contract definition ID (e.g., `contract-definition-1`)
   - `accessPolicyId`: The policy ID from step 4
   - `contractPolicyId`: The policy ID from step 4
-- Update the `assetsSelector` in the request body to reference your specific asset:
-
-```json
-"assetsSelector": [
-  {
-    "operandLeft": "@id",
-    "operator": "=",
-    "operandRight": "your-asset-id"
-  }
-]
-```
 
 6. Validate successful registration by checking your own catalog publication
 
@@ -111,8 +99,10 @@ Use the **Initiate Contract Negotiation V3** request:
   - `offerId`: The offer ID from the catalog (format: `assetId:policyId:definitionId`)
   - `assetId`: The asset ID you want to access
 - In the request body, update the `policy` section by copying the **exact policy** from the provider's catalog response that you received in the previous step.
-> Screenshot 1: Catalog Response
-> Screenshot 2: Negotiation with the copied policy
+
+![Catalog Response](./resources/catalog-request.png)
+
+![Negotiation with Policy](./resources/contract-negotiation.png)
 
 - Ensure the policy's `@id`, `assigner`, and `target` fields match the catalog offer
 - Send the request and save the returned `negotiationId` from the response
@@ -123,10 +113,10 @@ Use the **Get Negotiation State V3** request:
 - In the Pre-request Script tab, set `negotiationId` to the ID from step 1
 - Send the request repeatedly (every few seconds) to monitor the negotiation progress
 - Wait until the state becomes `FINALIZED` (states: REQUESTING → REQUESTED → OFFERED → ACCEPTED → AGREED → VERIFIED → FINALIZED)
-> Screenshot 1: Requesting/Requested
-> Screenshot 2: Finalized
-- Once finalized, use **Get Agreement For Negotiation V3** to retrieve the agreement ID (needed for data transfer)
-    - In the Pre-request Script tab, configure the following variable `negotiationId` with the Negotiation ID from the previous step.
+
+![Finalized Negotiation](./resources/negotiation-finalized.png)
+
+- Once finalized, retrieve the agreement ID (needed for data transfer)
 
 ## Phase 4: Data Transfer & Integration (25 minutes)
 
@@ -145,18 +135,29 @@ Use the **Create Transfer Process V3** request:
   - `counterPartyAddress`: Provider's DSP endpoint (same as used in negotiation)
   - `contractId`: The agreement ID obtained from the finalized negotiation (use **Get Agreement For Negotiation V3** if needed)
   - `transferType`: Set to `AmazonS3-PUSH` 
-- Send the request 
+- In the request body, add the following data destination to receive data on your S3 Bucket:
+```
+"dataDestination": {
+    "type": "AmazonS3",
+    "objectName": "your-destination-data-filename",
+    "region": "<REPLACE WITH THE BUCKET REGION>",
+    "bucketName": "<REPLACE WITH THE SOURCE BUCKET NAME>",
+    "accessKeyId": "<REPLACE WITH YOUR ACCESS KEY ID>",
+    "secretAccessKey": "<REPLACE WITH SECRET ACCESS KEY>"
+}
+```
+- Send the Transfer Process request.
 - Send the request repeatedly (every few seconds) to monitor the transfer state using **State Transfer Process V3** request.
 - Wait until the transfer state becomes `COMPLETED` (states: INITIAL → PROVISIONING → PROVISIONED → REQUESTING → REQUESTED → STARTING → STARTED → COMPLETING → COMPLETED)
-- Once completed, use **Get EDR Entry Data Address V3** to retrieve the data endpoint URL and access credentials
-- Use the endpoint information to make an HTTP request to fetch the actual data (you can use a tool like curl, Postman, or your browser)
+![](./resources/transfer-completed.png)
+
+- Once completed, visit the Think-it AWS Simple S3 Browser application
+![](./resources/s3-assets-transfered.png)
 
 2. Inspect the received data and share insights about your learnings.
 
-- Access the data using the endpoint information from the EDR cache entry
 - Review the data structure and content
 - Discuss with your team:
   - What data did you receive and how does it align with the catalog description?
-  - How did the policy constraints affect the negotiation and transfer process?
   - What challenges did you encounter during the data space workflow?
   - How could this data be integrated with your organization's systems?
