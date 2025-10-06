@@ -43,7 +43,7 @@ Use the **Create Asset V3** request. Modify the request body:
 
 Use the **Create Policy Definition V3** request:
 - In the Pre-request Script tab, set the `policyId` variable (e.g., `policy-1`)
-- The default request body already includes the correct permission structure with "use" action and empty constraints
+- The default request body already includes the correct permission structure with "use" action and empty constraints. It allows everyone to use the offer.
 - Send the request and save the policy ID for the next step
 
 5. Create a contract definition (data offer) using your asset ID and the policy ID that you created.
@@ -110,7 +110,10 @@ Use the **Initiate Contract Negotiation V3** request:
   - `counterPartyId`: Provider's participant ID (found in catalog response)
   - `offerId`: The offer ID from the catalog (format: `assetId:policyId:definitionId`)
   - `assetId`: The asset ID you want to access
-- In the request body, update the `policy` section by copying the **exact policy** from the provider's catalog response
+- In the request body, update the `policy` section by copying the **exact policy** from the provider's catalog response that you received in the previous step.
+> Screenshot 1: Catalog Response
+> Screenshot 2: Negotiation with the copied policy
+
 - Ensure the policy's `@id`, `assigner`, and `target` fields match the catalog offer
 - Send the request and save the returned `negotiationId` from the response
 
@@ -120,7 +123,10 @@ Use the **Get Negotiation State V3** request:
 - In the Pre-request Script tab, set `negotiationId` to the ID from step 1
 - Send the request repeatedly (every few seconds) to monitor the negotiation progress
 - Wait until the state becomes `FINALIZED` (states: REQUESTING → REQUESTED → OFFERED → ACCEPTED → AGREED → VERIFIED → FINALIZED)
+> Screenshot 1: Requesting/Requested
+> Screenshot 2: Finalized
 - Once finalized, use **Get Agreement For Negotiation V3** to retrieve the agreement ID (needed for data transfer)
+    - In the Pre-request Script tab, configure the following variable `negotiationId` with the Negotiation ID from the previous step.
 
 ## Phase 4: Data Transfer & Integration (25 minutes)
 
@@ -138,9 +144,9 @@ Use the **Create Transfer Process V3** request:
 - In the Pre-request Script tab, configure:
   - `counterPartyAddress`: Provider's DSP endpoint (same as used in negotiation)
   - `contractId`: The agreement ID obtained from the finalized negotiation (use **Get Agreement For Negotiation V3** if needed)
-  - `transferType`: Set to `HttpData-PULL` (you will pull data from the provider's endpoint)
-- Send the request and save the returned `transferProcessId`
-- Monitor the transfer state using **State Transfer Process V3** request
+  - `transferType`: Set to `AmazonS3-PUSH` 
+- Send the request 
+- Send the request repeatedly (every few seconds) to monitor the transfer state using **State Transfer Process V3** request.
 - Wait until the transfer state becomes `COMPLETED` (states: INITIAL → PROVISIONING → PROVISIONED → REQUESTING → REQUESTED → STARTING → STARTED → COMPLETING → COMPLETED)
 - Once completed, use **Get EDR Entry Data Address V3** to retrieve the data endpoint URL and access credentials
 - Use the endpoint information to make an HTTP request to fetch the actual data (you can use a tool like curl, Postman, or your browser)
