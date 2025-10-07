@@ -9,6 +9,15 @@ Think-it Sandbox Environment on AWS for Data Spaces Demonstrators.
 - Phase 3: Contract Negotiation & Policy Configuration
 - Phase 4: Data Transfer & Integration
 
+## Lab Participants
+
+| Lab Persona                                   | Participant ID          | Connector Protocol API                                              |
+|-----------------------------------------------|-------------------------|---------------------------------------------------------------------|
+| City of Madrid - Urban Infrastructure Manager | MADRID_MUNICIPALITY     | https://madrid-municipality.dataspace-sandbox.think-it.io/api/dsp   |
+| SEAT - Automotive Innovation Leader           | CAR_MANUFACTURER_1      | https://car-manufacturer-1.dataspace-sandbox.think-it.io/api/dsp    |
+| Renault - Strategic Mobility Partner          | CAR_MANUFACTURER_2      | https://car-manufacturer-2.dataspace-sandbox.think-it.io/api/dsp    |
+| EMT Madrid - Public Transport Authority       | EMT_MADRID              | https://emt-madrid.dataspace-sandbox.think-it.io/api/dsp            |
+| Madrid Road Maintenance Company               | ROADS_COMPANY_SL        | https://roads-company-sl.dataspace-sandbox.think-it.io/api/dsp      |
 ## Lab Guide and Instructions
 
 ### Configuring Postman to Interact with the Connector
