@@ -15,6 +15,8 @@
 
 ## Create an Asset
 
+An asset represents a resource that can be shared within the Dataspace, such as a file or a service endpoint.
+
 ```http
 POST /v3/assets
 Content-Type: application/json
@@ -39,26 +41,34 @@ Content-Type: application/json
 }
 ```
 
-## Request Catalog from another participant
+## Create a Policy Definition
+
+A policy definition specifies the rules and conditions for accessing an asset.
 
 ```http
-POST /v3/catalog/request
+POST /v3/policydefinitions
 Content-Type: application/json
 
 {
   "@context": {
-    "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+    "edc": "https://w3id.org/edc/v0.0.1/ns/"
   },
-  "@type": "CatalogRequest",
-  "counterPartyAddress": "https://provider.dataspaces.think-it.io/api/dsp",
-  "counterPartyId": "MY_CONNECTOR_ID",
-  "protocol": "dataspace-protocol-http",
-  "additionalScopes": [
-  ]
+  "@id": "aPolicy",
+  "policy": {
+    "@context":"http://www.w3.org/ns/odrl.jsonld",
+    "@type":"Set",
+    "permission":[{
+      "action":"use",
+    }],
+    "obligation":[],
+    "prohibition":[]
+  }
 }
 ```
 
 ## Create a Contract Definition
+
+A contract definition links assets with usage policies.
 
 ```http
 POST /v3/contractdefinitions
@@ -81,7 +91,30 @@ Content-Type: application/json
 }
 ```
 
+## Request Catalog from another participant
+
+The catalog endpoint allows consumers to discover available assets.
+
+```http
+POST /v3/catalog/request
+Content-Type: application/json
+
+{
+  "@context": {
+    "@vocab": "https://w3id.org/edc/v0.0.1/ns/"
+  },
+  "@type": "CatalogRequest",
+  "counterPartyAddress": "https://provider.dataspaces.think-it.io/api/dsp",
+  "counterPartyId": "MY_CONNECTOR_ID",
+  "protocol": "dataspace-protocol-http",
+  "additionalScopes": [
+  ]
+}
+```
+
 ## Initiate Contract Negotiation
+
+Contract negotiation is the process of establishing an agreement between a provider and a consumer for asset usage.
 
 ```http
 POST /v3/contractnegotiations
@@ -111,30 +144,9 @@ Content-Type: application/json
 }
 ```
 
-## Create a Policy Definition
-
-```http
-POST /v3/policydefinitions
-Content-Type: application/json
-
-{
-  "@context": {
-    "edc": "https://w3id.org/edc/v0.0.1/ns/"
-  },
-  "@id": "aPolicy",
-  "policy": {
-    "@context":"http://www.w3.org/ns/odrl.jsonld",
-    "@type":"Set",
-    "permission":[{
-      "action":"use",
-    }],
-    "obligation":[],
-    "prohibition":[]
-  }
-}
-```
-
 ## Initiate Transfer Process
+
+The transfer process manages the actual data transfer between provider and consumer.
 
 ### PUSH Flow
 
