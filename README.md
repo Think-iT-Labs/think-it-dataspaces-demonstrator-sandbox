@@ -4,9 +4,9 @@ Think-it Sandbox Environment on AWS for Data Spaces Demonstrators.
 
 ## Lab Phases
 
-- Phase 1: Secure and Sovereign Data Integration
+- Phase 1: Secure and sovereign integration of internal data systems to the data space
 - Phase 2: Discovery & Assessment
-- Phase 3: Contract Negotiation & Policy Configuration
+- Phase 3: Contract Negotiation & Agreement
 - Phase 4: Data Transfer & Integration
 
 ## Lab Participants
